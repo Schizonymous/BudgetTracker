@@ -18,12 +18,24 @@ def add_income():
     except ValueError:
         print(f"Please enter a valid number for amount.")
 
+def add_expense():
+    try:
+        amount = float(input("Enter expense amount: "))
+        category = input("Enter category (e.g., Food): ")
+        transactions.append({"type": "expense", "amount": amount, "category": category})
+        print(f"Added ${amount:.2f} to {category}")
+    except ValueError:
+        print(f"Please enter a valid number for amount.")
+
+
 def main():
     while True:
         show_menu()
         choice = input("Choose an option (1-5)")
         if choice == "1":
             add_income()
+        elif choice == "2":
+            add_expense()
         elif choice == "5":
             print("See Ya!")
             break
