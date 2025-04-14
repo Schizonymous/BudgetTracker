@@ -37,18 +37,26 @@ def get_balance():
     print(f"Current balance: ${balance:.2f}")
 
 def get_summary():
-    categories = {}
+    expense_categories = {}
+    income_categories = {}
     for t in transactions:
-        if t ["type"] == "expense":
-            cat = t["category"]
-            categories[cat] = categories.get(cat, 0) + t["amount"]
-    if not categories:
-        print(f"No expenses yet!")
-
+        cat = t["category"]
+        if t["type"] == "expense":
+            expense_categories[cat] = expense_categories.get(cat, 0) + t["amount"]
+        else:
+            income_categories[cat] = income_categories.get(cat, 0) + t["amount"]
+    print("Income:")
+    if not income_categories:
+        print("  No income yet!")
     else:
-        for cat, total in categories.items():
-            print(f"{cat}: ${total:.2f}")
-    
+        for cat, total in income_categories.items():
+            print(f"  {cat}: ${total:.2f}")
+    print("\nExpenses:")
+    if not expense_categories:
+        print("  No expenses yet!")
+    else:
+        for cat, total in expense_categories.items():
+            print(f"  {cat}: ${total:.2f}")
 def main():
     while True:
         show_menu()
