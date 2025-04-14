@@ -27,6 +27,23 @@ def add_expense():
     except ValueError:
         print(f"Please enter a valid number for amount.")
 
+def get_balance():
+    balance = 0
+    for t in transactions:
+        if t ["type"] == "income":
+            balance += t["amount"]
+        else:
+            balance -= t["amount"]
+    print(f"Current balance: ${balance:.2f}")
+
+def get_summary():
+    categories = {}
+    for t in transactions:
+        if t ["type"] == "expense":
+            cat = t["category"]
+            categories[cat] = categories.get(cat, 0) + t["amount"]
+    for cat, total in categories.items():
+        print(f"{cat}: ${total:.2f}")
 
 def main():
     while True:
@@ -36,11 +53,15 @@ def main():
             add_income()
         elif choice == "2":
             add_expense()
+        elif choice == "3":
+            get_balance()
+        elif choice == "4":
+            get_summary()
         elif choice == "5":
             print("See Ya!")
             break
         else:
-            print("Feature coming soon!")
+            print("Invalid choice, please select 1-5.")
 
 if __name__ == "__main__":
     main()
