@@ -42,9 +42,13 @@ def get_summary():
         if t ["type"] == "expense":
             cat = t["category"]
             categories[cat] = categories.get(cat, 0) + t["amount"]
-    for cat, total in categories.items():
-        print(f"{cat}: ${total:.2f}")
+    if not categories:
+        print(f"No expenses yet!")
 
+    else:
+        for cat, total in categories.items():
+            print(f"{cat}: ${total:.2f}")
+    
 def main():
     while True:
         show_menu()
